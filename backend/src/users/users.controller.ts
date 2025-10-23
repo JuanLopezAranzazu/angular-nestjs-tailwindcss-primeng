@@ -6,12 +6,18 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { RolesGuard } from '../common/guards/roles.guard';
+import { Role } from './types/role.type';
+import { Roles } from '../common/decorators/roles.decorator';
 
 @Controller('users')
+@UseGuards(RolesGuard)
+@Roles(Role.ADMIN)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

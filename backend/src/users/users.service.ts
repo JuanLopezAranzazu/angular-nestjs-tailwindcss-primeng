@@ -86,4 +86,22 @@ export class UsersService {
   ): Promise<boolean> {
     return argon.verify(hashedPassword, plainPassword);
   }
+
+  // actualizar token
+  async updateRt(userId: number, refreshToken: string) {
+    const hash = await argon.hash(refreshToken);
+
+    const user = await this.findOne(userId);
+
+    user.hashedRt = hash;
+    await this.usersRepository.save(user);
+  }
+
+  // eliminar token
+  async removeRt(userId: number): Promise<void> {
+    const user = await this.findOne(userId);
+
+    user.hashedRt = null;
+    await this.usersRepository.save(user);
+  }
 }

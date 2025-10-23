@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessTokenGuard } from './common/guards/access-token.guard';
 
 @Module({
   imports: [
@@ -24,8 +27,16 @@ import { UsersModule } from './users/users.module';
     }),
     // modulo de usuarios
     UsersModule,
+    // modulo para autenticacion de usuarios
+    AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    // autenticacion con jwt
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
+    },
+  ],
 })
 export class AppModule {}

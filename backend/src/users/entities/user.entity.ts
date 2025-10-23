@@ -31,6 +31,9 @@ export class User {
   })
   role: Role;
 
+  @Column({ type: 'varchar', nullable: true })
+  hashedRt?: string | null;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
