@@ -5,6 +5,8 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AccessTokenGuard } from './common/guards/access-token.guard';
+import { PropertiesModule } from './properties/properties.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -29,6 +31,10 @@ import { AccessTokenGuard } from './common/guards/access-token.guard';
     UsersModule,
     // modulo para autenticacion de usuarios
     AuthModule,
+    // modulo de propiedades
+    PropertiesModule,
+    // inicializar datos
+    DatabaseModule,
   ],
   controllers: [],
   providers: [
