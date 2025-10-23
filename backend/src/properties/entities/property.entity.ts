@@ -6,10 +6,12 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { PropertyType } from '../types/propertyType.type';
 import { PropertyStatus } from '../types/propertyStatus.type';
+import { ContactRequest } from 'src/contact-requests/entities/contact-request.entity';
 
 @Entity('properties')
 export class Property {
@@ -74,6 +76,12 @@ export class Property {
 
   @Column({ name: 'owner_id' })
   ownerId: number;
+
+  @OneToMany(
+    () => ContactRequest,
+    (contactRequest: ContactRequest) => contactRequest.user,
+  )
+  contactRequests: ContactRequest[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

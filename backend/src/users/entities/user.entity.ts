@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Role } from '../types/role.type';
 import { Property } from '../../properties/entities/property.entity';
+import { ContactRequest } from 'src/contact-requests/entities/contact-request.entity';
 
 @Entity('users')
 export class User {
@@ -38,6 +39,12 @@ export class User {
 
   @OneToMany(() => Property, (property: Property) => property.owner)
   properties: Property[];
+
+  @OneToMany(
+    () => ContactRequest,
+    (contactRequest: ContactRequest) => contactRequest.user,
+  )
+  contactRequests: ContactRequest[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

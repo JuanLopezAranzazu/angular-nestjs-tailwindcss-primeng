@@ -7,6 +7,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AccessTokenGuard } from './common/guards/access-token.guard';
 import { PropertiesModule } from './properties/properties.module';
 import { DatabaseModule } from './database/database.module';
+import { ContactRequestsModule } from './contact-requests/contact-requests.module';
 
 @Module({
   imports: [
@@ -33,6 +34,8 @@ import { DatabaseModule } from './database/database.module';
     AuthModule,
     // modulo de propiedades
     PropertiesModule,
+    // modulo para solicitudes de contacto
+    ContactRequestsModule,
     // inicializar datos
     DatabaseModule,
   ],
